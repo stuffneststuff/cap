@@ -1,0 +1,246 @@
+   /* Base Styles */
+        body {
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 100vh; /* Restrict to viewport height */
+    flex-direction: column; /* Changed to column to fit the Embedder section */
+    justify-content: center;
+    align-items: center;
+    min-height: 1vh;
+    background-color: #f0f4f8;
+    padding: 20px;
+}
+
+
+@media (min-width: 768px) {
+    .rotate-content {
+        transform-origin: center center;
+        transform: scale(0.8) rotate(var(--rotation-deg, 0deg));
+    }
+}
+
+.recaptcha-container, .challenge-popup, .embedder-console {
+    max-height: 100vh;
+    overflow-y: auto;
+}
+        /* CAPTCHA Container */
+        .recaptcha-container {
+            border: 1px solid #d1d5db;
+            padding: 1rem;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            width: 300px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .recaptcha-container:hover {
+            transform: translateY(-2px);
+        }
+
+        .checkbox-input {
+            width: 25px;
+            height: 25px;
+            border: 2px solid #9ca3af;
+            border-radius: 3px;
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .checked {
+            background-color: #10b981;
+            border-color: #10b981;
+            color: white;
+            font-size: 20px;
+        }
+
+        .check-icon { display: none; }
+        .checked .check-icon { display: block; }
+
+        /* --- Challenge Popup --- */
+        .challenge-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .challenge-box {
+            background-color: #fff;
+            width: 380px; 
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .challenge-header {
+            padding: 15px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .challenge-content {
+            padding: 15px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 15px;
+        }
+        
+        /* General Grid Item Styling */
+        .grid-item {
+            width: 100%;
+            padding-top: 100%;
+            position: relative;
+            cursor: pointer;
+            box-sizing: border-box;
+            transition: opacity 0.1s, transform 0.1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            
+        }
+        
+        .grid-item:hover { opacity: 0.9; }
+        
+        .grid-item.selected {
+            border: 4px solid #f59e0b; 
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Rotational Puzzle Specific CSS */
+        .rotate-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-out;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #374151; 
+        }
+
+        /* Simple SVG for Rotation Puzzle pattern */
+        .rotate-content svg {
+            width: 80%;
+            height: 80%;
+        }
+
+        /* --- V1 Text Input Style --- */
+        .v1-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+        }
+        .v1-image-box {
+            width: 100%;
+            height: 100px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-family: serif;
+            font-style: italic;
+            position: relative;
+            
+            letter-spacing: 5px;
+        }
+        .v1-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        /* Modal for Success/Fail messages */
+        .notification-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px 30px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            display: none;
+            z-index: 2000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease-out;
+        }
+        .modal-success { background-color: #10b981; }
+        .modal-error { background-color: #ef4444; }
+
+        @keyframes slideIn {
+            from { opacity: 0; top: 40%; }
+            to { opacity: 1; top: 50%; }
+        }
+        
+        /* Embedder Console Styles */
+        .embedder-console {
+            margin-top: 30px;
+            width: 400px;
+            background-color: #1f2937;
+            color: #d1d5db;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 0.875rem;
+            font-family: monospace;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .log-line {
+            padding: 2px 0;
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.1);
+        }
+        .log-success { color: #10b981; }
+        .log-error { color: #ef4444; }
+
+
+
+/* Default: images full height and width (normal size) */
+.image-grid .grid-item {
+    height: auto; /* let padding-top control aspect ratio */
+}
+
+/* For desktop and larger screens */
+@media (min-width: 768px) {
+    .image-grid .grid-item {
+        padding-top: 0.0000001%;  /* Shrinks height relative to width */
+        /* If images inside grid-item, adjust accordingly */
+    }
+}
